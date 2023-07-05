@@ -1,4 +1,4 @@
-package com.inst.money.openapi.dto;
+package com.beyounger.openapi.dto;
 
 public class Customer {
     private String email;

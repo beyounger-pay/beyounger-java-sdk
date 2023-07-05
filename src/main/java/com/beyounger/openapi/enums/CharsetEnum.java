@@ -1,4 +1,4 @@
-package com.inst.money.openapi.enums;
+package com.beyounger.openapi.enums;
 
 
 public enum CharsetEnum {

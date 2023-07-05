@@ -1,20 +1,14 @@
-package com.inst.money.openapi.util;
+package com.beyounger.openapi.util;
 
 
-import com.alibaba.fastjson.JSONObject;
-import com.inst.money.openapi.enums.CharsetEnum;
+import com.beyounger.openapi.enums.CharsetEnum;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.management.RuntimeErrorException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 
 public class HmacSHA256Base64Util {
     public static Mac MAC;

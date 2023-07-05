@@ -1,8 +1,7 @@
-package com.inst.money.openapi;
+package com.beyounger.openapi;
 
 import com.alibaba.fastjson.JSONObject;
-import com.inst.money.openapi.util.HmacSHA256Base64Util;
-import com.inst.money.openapi.util.HmacUtil;
+import com.beyounger.openapi.util.HmacSHA256Base64Util;
 import org.junit.Test;
 
 import java.util.TreeMap;

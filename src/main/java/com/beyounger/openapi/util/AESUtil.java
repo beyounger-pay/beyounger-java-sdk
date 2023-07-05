@@ -1,4 +1,4 @@
-package com.inst.money.openapi.util;
+package com.beyounger.openapi.util;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;

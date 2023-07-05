@@ -1,10 +1,10 @@
-package com.inst.money.openapi;
+package com.beyounger.openapi;
 
 
 import com.alibaba.fastjson.JSON;
-import com.inst.money.openapi.dto.Customer;
-import com.inst.money.openapi.dto.PaymentReq;
-import com.inst.money.openapi.util.HttpUtil;
+import com.beyounger.openapi.dto.Customer;
+import com.beyounger.openapi.dto.PaymentReq;
+import com.beyounger.openapi.util.HttpUtil;
 
 
 import org.junit.Before;

@@ -1,13 +1,10 @@
-package com.inst.money.openapi;
+package com.beyounger.openapi;
 
-import com.alibaba.fastjson.JSON;
-import com.inst.money.openapi.util.HttpUtil;
+import com.beyounger.openapi.util.HttpUtil;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 

@@ -1,8 +1,6 @@
-package com.inst.money.openapi.dto;
+package com.beyounger.openapi.dto;
 
 import com.alibaba.fastjson.JSONObject;
-
-import java.util.TreeMap;
 
 public class PaymentReq {
 

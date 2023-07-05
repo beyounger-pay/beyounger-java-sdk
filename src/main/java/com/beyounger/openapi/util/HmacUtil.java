@@ -1,7 +1,7 @@
-package com.inst.money.openapi.util;
+package com.beyounger.openapi.util;
 
 
-import com.inst.money.openapi.enums.CharsetEnum;
+import com.beyounger.openapi.enums.CharsetEnum;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.crypto.Mac;
