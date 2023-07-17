@@ -22,10 +22,11 @@ public class EventTest {
 
     @Test
     public void pushEventsTest() throws Exception {
+        long timstamp = System.currentTimeMillis();
         String requestPath = "/api/v1/events/test";
         String requestQueryStr = "";
         Map req = new HashMap();
-        HttpUtil.post(requestPath,requestQueryStr,req.toString(), merchantId);
+        HttpUtil.post(requestPath,requestQueryStr,req.toString(), merchantId, timstamp);
     }
 
 

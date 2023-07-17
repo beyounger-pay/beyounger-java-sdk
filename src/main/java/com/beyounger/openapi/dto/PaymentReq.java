@@ -1,5 +1,6 @@
 package com.beyounger.openapi.dto;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class PaymentReq {
     private String return_url;
 
     private Customer customer;
-    private List<CartItem> cart_items;
+    private JSONArray cart_items;
     private DeliveryDetails delivery_details;
     private DeliveryRecipient delivery_recipient;
     private Long expire;
@@ -97,11 +98,11 @@ public class PaymentReq {
         this.customer = customer;
     }
 
-    public List<CartItem> getCart_items() {
+    public JSONArray getCart_items() {
         return cart_items;
     }
 
-    public void setCart_items(List<CartItem> cart_items) {
+    public void setCart_items(JSONArray cart_items) {
         this.cart_items = cart_items;
     }
 

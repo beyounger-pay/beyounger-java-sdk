@@ -2,11 +2,12 @@ package com.beyounger.openapi;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.beyounger.openapi.dto.*;
 import com.beyounger.openapi.util.HttpUtil;
 
 
-import com.beyounger.openapi.util.SHA512Util;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,9 +28,11 @@ public class PaymentTest {
 //    private static final String apiSecret = "6edadeb7-7d3e-4137-9e52-d51bdd381c2a";
 //    private static final String apiPassphrase = "12345678a";
 
-    String host = "https://api.beyounger.com/";
-    private static final String merchantId = "12345678910";
-    private static final String apiSecret = "6edadeb7-7d3e-4137-9e52-d51bdd381c2a";
+    String host = "https://api.beyounger.com";
+//    String host = "http://localhost:8585";
+    private static final String merchantId = "d73d82c2801b47c8b5247ad9344d5711";
+//    private static final String apiSecret = "xPiU+IHMtbkP1+If+52TBfLXvhAvEdmuDKAbkQndUS8kwnqs2zHe0ITi9HCdiaTU";
+    private static final String apiSecret = "61a02d15-760d-41ca-8126-60cbb77728c8";
 
 
 
@@ -52,7 +55,7 @@ public class PaymentTest {
         req.setCust_order_id(UUID.randomUUID().toString());
         //支付方式 paypal sofort paysafecard creditcard等
         req.setPayment_method("paypal");
-        req.setMerchant_name("");
+        req.setMerchant_name("test-api-name");
         req.setSite_id(1);
         req.setReturn_url("https://api.beyounger.com/status.html");
         req.setNotification_url("https://api.beyounger.com/status.html");
@@ -71,16 +74,16 @@ public class PaymentTest {
         req.setCustomer(customer);
 
         //商品信息(选填)
-        List<CartItem> cartItems = new ArrayList<>();
-        CartItem item = new CartItem();
-        item.setName("White GenericBrand handbag");
-        item.setQuantity(1);
-        item.setAmount("99.95");
-        item.setCurrency("CAD");
-        item.setProduct_id("Ag54352R7768kkO");
-        item.setCategory("Apparel and accessories");
-        cartItems.add(item);
-        req.setCart_items(cartItems);
+        JSONArray array = new JSONArray();
+        array.add(new JSONObject()
+                .fluentPut("name", "White GenericBrand handbag")
+                .fluentPut("quantity", 1)
+                .fluentPut("amount", "99.95")
+                .fluentPut("currency", "CAD")
+                .fluentPut("product_id", "Ag54352R7768kkO")
+                .fluentPut("category", "Apparel and accessories")
+        );
+        req.setCart_items(array);
 
         //快递信息(选填)
         DeliveryDetails details = new DeliveryDetails();
@@ -103,63 +106,99 @@ public class PaymentTest {
         recipient.setZipcode("");
         req.setDelivery_recipient(recipient);
 
-
+        long timeStamp = System.currentTimeMillis();
         String signature = merchantId +
                 "&" + req.getCust_order_id() +
                 "&" + req.getAmount() +
                 "&" + req.getCurrency() +
                 "&" + apiSecret +
-                "&" + System.currentTimeMillis();
+                "&" + timeStamp;
 
-        HttpUtil.post(requestPath,req.toString(),signature,merchantId);
+        HttpUtil.post(requestPath,req.toString(),signature,merchantId, timeStamp);
+    }
+
+    @Test
+    public void checkout()throws Exception{
+
+        String requestPath = "/v1/checkout";
+        String requestQueryStr = "id=2307141431422614977";
+
+        System.out.println("------ queryOrderTest start");
+
+        long timeStamp = System.currentTimeMillis();
+        String signature = merchantId +
+                "&" + apiSecret +
+                "&" + timeStamp;
+
+        HttpUtil.get(requestPath, requestQueryStr,signature,merchantId,timeStamp);
+    }
+
+    //选择支付方法
+    @Test
+    public void choosePayment()throws Exception{
+        String requestPath = "/v1/choosePayment";
+        Map req = new HashMap<>();
+        req.put("id", "2307141431422614977");
+        req.put("processor", "nextpay_processor");
+
+        long timeStamp = System.currentTimeMillis();
+        String signature = merchantId +
+                "&" + apiSecret +
+                "&" + timeStamp;
+
+        HttpUtil.post(requestPath, JSON.toJSONString(req),signature,merchantId,timeStamp);
     }
 
     @Test
     public void getRatesTest() throws Exception {
         String requestPath = "/api/v1/rates";
         String requestQueryStr = "from_currency=USD&to_coin=ETH";
+        long timeStamp = System.currentTimeMillis();
         String signature = merchantId +
                 "&" + apiSecret +
-                "&" + System.currentTimeMillis();
-        HttpUtil.get(requestPath,requestQueryStr,signature,merchantId);
+                "&" + timeStamp;
+        HttpUtil.get(requestPath,requestQueryStr,signature,merchantId, timeStamp);
     }
 
     @Test
     public void getOrdersTest() throws Exception {
         String requestPath = "/api/v1/orders";
         String requestQueryStr = "currency=USD&page_size=20&status=1";
+        long timeStamp = System.currentTimeMillis();
         String signature = merchantId +
                 "&" + apiSecret +
-                "&" + System.currentTimeMillis();
+                "&" + timeStamp;
 //        String requestQueryStr = "currency=USD&page_size=20&start_time=1626339331000&end_time=1626339331000";
-        HttpUtil.get(requestPath,requestQueryStr,signature,merchantId);
+        HttpUtil.get(requestPath,requestQueryStr,signature,merchantId, timeStamp);
     }
     @Test
     public void getCustAssetTest() throws Exception {
         String requestPath = "/api/v1/balance";
         String requestQueryStr = "";
+        long timeStamp = System.currentTimeMillis();
         String signature = merchantId +
                 "&" + apiSecret +
-                "&" + System.currentTimeMillis();
-        HttpUtil.get(requestPath,requestQueryStr,signature,merchantId);
+                "&" + timeStamp;
+        HttpUtil.get(requestPath,requestQueryStr,signature,merchantId, timeStamp);
     }
     @Test
     public void getCustOrderTest() throws Exception {
         String requestPath = "/api/v1/orders";
         String requestQueryStr = "cust_order_id=1ec7b32b-0750-4308-b882-f00d45b4f712";
+        long timeStamp = System.currentTimeMillis();
         String signature = merchantId +
                 "&" + apiSecret +
-                "&" + System.currentTimeMillis();
-        HttpUtil.get(requestPath,requestQueryStr,signature,merchantId);
+                "&" + timeStamp;
+        HttpUtil.get(requestPath,requestQueryStr,signature,merchantId, timeStamp);
     }
     @Test
     public void refundTest() throws Exception {
-
+        long timeStamp = System.currentTimeMillis();
         String requestPath = "/api/v1/refund";
         String requestQueryStr = "";
         Map req = new HashMap<>();
         req.put("cust_order_id","7c235b70-f0c1-487d-a4e6-02894a821aea");
-        HttpUtil.post(requestPath,requestQueryStr, JSON.toJSONString(req), merchantId);
+        HttpUtil.post(requestPath,requestQueryStr, JSON.toJSONString(req), merchantId, timeStamp);
     }
     @Test
     public void queryOrderTest() throws Exception {
@@ -167,11 +206,12 @@ public class PaymentTest {
         String requestPath = "/v1/checkout";
         String requestQueryStr = "id=20210722083735119900000205";
 
+        long timeStamp = System.currentTimeMillis();
         System.out.println("------ queryOrderTest start");
         String signature = merchantId +
                 "&" + apiSecret +
-                "&" + System.currentTimeMillis();
-        HttpUtil.get(requestPath,requestQueryStr,signature,merchantId);
+                "&" + timeStamp;
+        HttpUtil.get(requestPath,requestQueryStr,signature,merchantId, timeStamp);
         System.out.println("------ queryOrderTest end");
     }
 
