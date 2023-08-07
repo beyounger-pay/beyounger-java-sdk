@@ -19,13 +19,13 @@ public class HttpUtil {
         apiSecret = apisecret;
     }
 
-    public static void get(String requestPath, String requestQueryStr, String signature, String merchantId, long timeStamp) throws Exception {
+    public static void get(String requestPath, String requestQueryStr, String signature, String apiKey, long timeStamp) throws Exception {
         String SIGN_SEPARATOR = ":";
 
         String sign = SHA512Util.sign(signature);
 
         String authorizationStr =
-                         merchantId
+                        apiKey
                         + SIGN_SEPARATOR
                         + timeStamp
                         + SIGN_SEPARATOR
@@ -51,12 +51,12 @@ public class HttpUtil {
         }
     }
 
-    public static void post(String requestPath, String reqString, String signature, String merchantId, long timeStamp) throws Exception {
+    public static void post(String requestPath, String reqString, String signature, String apiKey, long timeStamp) throws Exception {
         String SIGN_SEPARATOR = ":";
 
         String sign = SHA512Util.sign(signature);
 
-        String authorizationStr = merchantId
+        String authorizationStr = apiKey
                 + SIGN_SEPARATOR
                 + timeStamp
                 + SIGN_SEPARATOR
@@ -82,13 +82,13 @@ public class HttpUtil {
         }
     }
 
-    public static void put(String requestPath, String reqString, String signature, String merchantId) throws Exception {
+    public static void put(String requestPath, String reqString, String signature, String apiKey) throws Exception {
         String SIGN_SEPARATOR = ":";
         String timeStampStr = String.valueOf(System.currentTimeMillis());
 
         String sign = SHA512Util.sign(signature);
 
-        String authorizationStr = merchantId
+        String authorizationStr = apiKey
                 + SIGN_SEPARATOR
                 + timeStampStr
                 + SIGN_SEPARATOR

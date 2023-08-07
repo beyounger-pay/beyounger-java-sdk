@@ -10,13 +10,6 @@ import java.security.NoSuchAlgorithmException;
 public class SHA512Util {
     public static MessageDigest MessageDigest;
 
-//    static {
-//        try {
-//            MessageDigest = MessageDigest.getInstance("SHA-512");
-//        } catch (NoSuchAlgorithmException e) {
-//            throw new RuntimeErrorException(new Error("Can't get MessageDigest's instance."));
-//        }
-//    }
 
     public static String sign(String signature) throws Exception {
         if (StringUtils.isEmpty(signature)) {

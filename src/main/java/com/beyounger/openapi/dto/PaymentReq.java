@@ -130,13 +130,6 @@ public class PaymentReq {
         this.expire = expire;
     }
 
-    public String getFixed_card_number() {
-        return fixed_card_number;
-    }
-
-    public void setFixed_card_number(String fixed_card_number) {
-        this.fixed_card_number = fixed_card_number;
-    }
 
     @Override
     public String toString() {

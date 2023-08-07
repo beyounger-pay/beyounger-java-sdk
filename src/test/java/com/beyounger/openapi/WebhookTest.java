@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class EventTest {
+public class WebhookTest {
 
-    String host = "https://api.sandbox.inst.money";
-    private static final String merchantId = "59d07871c9cb4f5190ba468ea0a8b4ee";
+    String host = "https://api.beyounger.com";
+    private static final String appKey = "59d07871c9cb4f5190ba468ea0a8b4ee";
     private static final String apiSecret = "6edadeb7-7d3e-4137-9e52-d51bdd381c2a";
 
     @Before
@@ -26,7 +26,7 @@ public class EventTest {
         String requestPath = "/api/v1/events/test";
         String requestQueryStr = "";
         Map req = new HashMap();
-        HttpUtil.post(requestPath,requestQueryStr,req.toString(), merchantId, timstamp);
+        HttpUtil.post(requestPath,requestQueryStr,req.toString(), appKey, timstamp);
     }
 
 
