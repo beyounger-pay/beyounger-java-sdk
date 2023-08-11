@@ -14,8 +14,7 @@ public class PaymentReq {
     private String cust_order_id;
 
     private String payment_method;
-    private String merchant_name;
-    private Integer site_id;
+
     private String notification_url;
     private String return_url;
 
@@ -25,6 +24,7 @@ public class PaymentReq {
     private DeliveryRecipient delivery_recipient;
     private Long expire;
     private String fixed_card_number;
+
 
     public String getCurrency() {
         return currency;
@@ -58,21 +58,6 @@ public class PaymentReq {
         this.payment_method = payment_method;
     }
 
-    public String getMerchant_name() {
-        return merchant_name;
-    }
-
-    public void setMerchant_name(String merchant_name) {
-        this.merchant_name = merchant_name;
-    }
-
-    public Integer getSite_id() {
-        return site_id;
-    }
-
-    public void setSite_id(Integer site_id) {
-        this.site_id = site_id;
-    }
 
     public String getNotification_url() {
         return notification_url;
