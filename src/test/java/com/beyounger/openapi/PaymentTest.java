@@ -54,9 +54,7 @@ public class PaymentTest {
         req.setAmount("100.05");
         req.setCust_order_id(UUID.randomUUID().toString());
         //支付方式 paypal sofort paysafecard creditcard等
-        req.setPayment_method("paypal");
-        req.setMerchant_name("test-api-name");
-        req.setSite_id(1);
+        req.setPayment_method("creditcard");
         req.setReturn_url("https://api.beyounger.com/status.html");
         req.setNotification_url("https://api.beyounger.com/status.html");
 
