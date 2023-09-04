@@ -1,7 +1,7 @@
 package com.beyounger.openapi;
 
 import com.alibaba.fastjson.JSONObject;
-import com.beyounger.openapi.util.SHA512Util;
+import com.beyounger.openapi.util.SignUtil;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class WebhookNotifyTest {
         String signatureData = apiKey + "&"+(String)map.get("data") + "&" + apiSecret +"&" +timeStamp;
         //verify
         try {
-            String sign = SHA512Util.sign(signatureData);
+            String sign = SignUtil.sign(signatureData);
             System.out.println("sign: "+sign);
             if (sign.equals(signature)) {
                 System.out.println("signature is right");

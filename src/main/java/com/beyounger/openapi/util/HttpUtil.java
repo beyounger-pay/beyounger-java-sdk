@@ -22,7 +22,7 @@ public class HttpUtil {
     public static void get(String requestPath, String requestQueryStr, String signature, String apiKey, long timeStamp) throws Exception {
         String SIGN_SEPARATOR = ":";
 
-        String sign = SHA512Util.sign(signature);
+        String sign = SignUtil.sign(signature);
 
         String authorizationStr =
                         apiKey
@@ -54,7 +54,7 @@ public class HttpUtil {
     public static void post(String requestPath, String reqString, String signature, String apiKey, long timeStamp) throws Exception {
         String SIGN_SEPARATOR = ":";
 
-        String sign = SHA512Util.sign(signature);
+        String sign = SignUtil.sign(signature);
 
         String authorizationStr = apiKey
                 + SIGN_SEPARATOR
@@ -86,7 +86,7 @@ public class HttpUtil {
         String SIGN_SEPARATOR = ":";
         String timeStampStr = String.valueOf(System.currentTimeMillis());
 
-        String sign = SHA512Util.sign(signature);
+        String sign = SignUtil.sign(signature);
 
         String authorizationStr = apiKey
                 + SIGN_SEPARATOR
